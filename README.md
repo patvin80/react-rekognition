@@ -1,7 +1,6 @@
 # AWS Rekognition - AWS Meetup Lightning Talk
 Hello and Welcome to this repository that exposes capabilities of AWS Rekognition to parse and identify celebrities from images and validates the quote. 
-
-1. About Me - [Vinit Patankar|www.linkedin.com/in/pvinit]
+1. About Me - [ Vinit Patankar ](https://www.linkedin.com/in/pvinit)
 2. Thank you Sponsors - 
 3. AWS Rekognition Service Overview
     1. AWS Rekognition Service [1]
@@ -10,7 +9,7 @@ Hello and Welcome to this repository that exposes capabilities of AWS Rekognitio
 4. Idea Phase
     1. AWS CLI [5]
     2. recognize-celebrities [6]
-    3. Last Week Tonight Site  [7]
+    3. Last Week Tonight Site [7]
 5. Solution Development
     1. React [8]  
     2. Serverless Framework [9]
@@ -32,5 +31,5 @@ Hello and Welcome to this repository that exposes capabilities of AWS Rekognitio
 [5]: https://docs.aws.amazon.com/cli/latest/reference/rekognition/index.html
 [6]: https://docs.aws.amazon.com/cli/latest/reference/rekognition/recognize-celebrities.html
 [7]: http://www.definitelyrealquotes.com/
-[7]: https://reactjs.org/docs/add-react-to-a-new-app.html
-[8]: https://serverless.com/framework/docs/providers/aws/guide/quick-start/
+[8]: https://reactjs.org/docs/add-react-to-a-new-app.html
+[9]: https://serverless.com/framework/docs/providers/aws/guide/quick-start/
