@@ -7,13 +7,13 @@ Hello and Welcome to this repository that exposes capabilities of AWS Rekognitio
     2. Demo on AWS Console [2] [3]
     3. Pricing [4]
 4. Idea Phase
-    1. AWS CLI [5]
+    1. *AWS CLI [5]
     2. recognize-celebrities [6]
     3. Last Week Tonight Site [7]
 5. Solution Development
     1. React [8]  
     2. Serverless Framework [9]
-    3. Lambda Code
+    3. *Lambda Code
 6. Demo 
     1. npm install
     2. npm start
