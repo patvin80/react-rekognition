@@ -1,7 +1,9 @@
 # AWS Rekognition - AWS Meetup Lightning Talk
+
 Hello and Welcome to this repository that exposes capabilities of AWS Rekognition to parse and identify celebrities from images and validates the quote. 
+
 1. About Me - [ Vinit Patankar ](https://www.linkedin.com/in/pvinit)
-2. Thank you Sponsors - 
+2. Thank you Sponsors - [ DynaTrace ](https://www.dynatrace.com/)
 3. AWS Rekognition Service Overview
     1. AWS Rekognition Service [1]
     2. Demo on AWS Console [2] [3]
@@ -9,7 +11,7 @@ Hello and Welcome to this repository that exposes capabilities of AWS Rekognitio
 4. Idea Phase
     1. *AWS CLI [5]
     2. recognize-celebrities [6]
-    3. Last Week Tonight Site [7]
+    3. Last Week Tonight Site [Definitely Real Quotes](ww.definitelyrealquotes.com)[7]
 5. Solution Development
     1. React [8]  
     2. Serverless Framework [9]
@@ -23,6 +25,27 @@ Hello and Welcome to this repository that exposes capabilities of AWS Rekognitio
     1. Model Management - 
         Example - https://s.aolcdn.com/hss/storage/midas/337b43cf039e038e1932a0547597705e/204567772/trumppeople.nocrop.w710.h2147483647.jpg
     2. Availability
+
+## Instructions to Setup Repository:
+
+1. Install Serverless using npm install serverless -g
+2. Clone the Repository - git clone https://github.com/patvin80/react-rekognition.git
+3. Open rekognition-client/src/containers/Home.js and update the AWS Credentials.
+4. Deploy the Backend - Lambda function
+    1. Navigate to the rekognition-service folder.
+    2. Backend comprises of DynamoDB (some persistence), Lambda function and Role
+    3. aws configure - Necessary for the Serverless to deploy the necessary artifacts
+    4. npm install
+    4. sls deploy
+5. Backend Testing
+    1. Open the ./mocks/image-parse.json file which has body that contains the image URL
+    2. npm install # does not hurt
+    3. sls invoke -f RekognizeFaces --path ./mocks/image-parse.json
+    4. Local Test sls invoke local -f -f RekognizeFaces --path ./mocks/image-parse.json
+6. Power up the UI
+    1. Navigate to rekognition-client
+    2. npm install
+    3. npm start
 
 [1]: https://console.aws.amazon.com/rekognition/home?region=us-east-1#/
 [2]: https://console.aws.amazon.com/rekognition/home?region=us-east-1#/label-detection

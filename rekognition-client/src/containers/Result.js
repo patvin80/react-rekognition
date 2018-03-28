@@ -15,7 +15,6 @@ const result = (props) => {
                   window.open('https://www.snopes.com?s=' + qs);
                 }
                 }>Snopes</Button>
-                <Search url={ 'https://www.snopes.com?s=' + encodeURIComponent(props.result.CelebrityName + " " + props.result.CelebrityQuote.substr(1, 30)) }/>
               </Panel>
             </Col>
           </Row>

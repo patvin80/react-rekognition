@@ -10,6 +10,8 @@ let rekognition = new AWS.Rekognition();
 const dynamoDb = new AWS.DynamoDB.DocumentClient();
 AWS.config.update({ region: "us-east-1" });
 
+var rekog = Promise.promisifyAll(rekognition);
+
 module.exports.RekognizeFace = (event, context, callback) => {
     // Read the Image Passed in the URL
     request.get(event.body)
@@ -19,56 +21,31 @@ module.exports.RekognizeFace = (event, context, callback) => {
                 Bytes: res
             }
         };
-        rekognition.recognizeCelebrities(params, function(err, data) {
-            let celebrityQuote = ""; 
-            let celebrityName = "";
-            if (err)
-            {
-                console.log(err, err.stack); // an error occurred
-            }
-            else
-            {
-                if (data.CelebrityFaces.length >= 1)
-                {
-                    data.CelebrityFaces.map(celeb => {
-                        celebrityName = celebrityName + celeb.Name         // successful response
-                    })
-                }   
-                else{
-                    celebrityName = "";
-                }
-                detectText(params, rekognition)
-                    .then(resolve => {
-                        celebrityQuote = resolve;
-                        let response = { CelebrityName :  celebrityName , CelebrityQuote : celebrityQuote };
-                        const params = {
-                            TableName: "celebrity-quotes",
-                            Item: {
-                              quote_id: uuid.v1(),
-                              celebrity_name : celebrityName,
-                              celebrity_quote: celebrityQuote,
-                              createdAt: new Date().getTime()
-                            }
-                        };
-                        save(params).then( (result) => {
-                            callback(null, response);
-                        }).catch ((err) => {
-                            console.log(err);
-                            callback(null, response);
-                        });;
-
-                    })
-                    .catch(err => {
-                        console.log("Error : Trouble Parsing the Text from the Image" + err);
-                        response = { CelebrityName :  celebrityName , CelebrityQuote : "" };
-                        callback(null, err);
-                    });
-            }  
+        //console.log(params);
+        rekog.recognizeCelebritiesAsync(params)
+        .then((data) => {
+            celebrityName = celebrityNameResult(data);
+            return celebrityNameResult(data);
+        })
+        .then((data) => {
+            rekog.detectTextAsync(params)
+            .then((data) => {
+                let celebrityQuote = celebrityQuoteText(data);
+                let response = { CelebrityName :  celebrityName , CelebrityQuote : celebrityQuote };
+                // Async call to the Dynamo DB to save the result so that we can ensure that values are searchable for future.
+                saveToDynamo(celebrityName, celebrityQuote);
+                callback(null, response);
+            })
+            .catch(err => {
+                console.log("Error : Trouble Parsing the Text from the Image" + err);
+                response = { CelebrityName :  celebrityName , CelebrityQuote : "Quote Not Detected" };
+                callback(null, response);
+            });
+        })
+        .catch( (err) => {
+            console.log("Error : Trouble Processing the URL Provided" + err);
+            callback(new Error("Error : Trouble Processing the URL Provided" + err));
         });
-    })
-    .catch( (err) => {
-        console.log("Error : Trouble Processing the URL Provided" + err);
-        callback(new Error("Error : Trouble Processing the URL Provided" + err));
     });
 }
 
@@ -90,3 +67,41 @@ const detectText = (params, rekognition) => {
         });
     });
 } 
+
+const celebrityNameResult = (data) => {
+    let celebrityQuote = ""; 
+    let celebrityName = "";
+    if (data.CelebrityFaces.length >= 1)
+    {
+        data.CelebrityFaces.map(celeb => {
+            celebrityName = celebrityName + celeb.Name         // successful response
+        })
+    }   
+    else {
+        celebrityName = "NO CELEBRITY DETECTED!!!";
+    }
+    return celebrityName;
+}
+
+const celebrityQuoteText = (data) => {
+    let celebrityQuote = '';
+    data.TextDetections.map( txt => {
+        if (txt.Type === "WORD")
+            celebrityQuote = celebrityQuote + " " + txt.DetectedText;
+    });
+    return (celebrityQuote)
+}
+
+const saveToDynamo = (celebrityName, celebrityQuote) => {
+    const params = {
+        TableName: "celebrity-quotes",
+        Item: {
+            quote_id: uuid.v1(),
+            celebrity_name : celebrityName,
+            celebrity_quote: celebrityQuote,
+            createdAt: new Date().getTime()
+        }
+    };
+    save(params);
+
+}
