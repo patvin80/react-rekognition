@@ -1,0 +1,13 @@
+# AWS Shell Commands
+# Detect labels
+rekognition detect-labels --image S3Object="{Bucket=rekognitionprojectpatvin80,Name=Shakespeare.png}"
+# Detech text
+rekognition detect-text --image S3Object="{Bucket=rekognitionprojectpatvin80,Name=Shakespeare.png}"
+# Identify Celebrities
+rekognition recognize-celebrities --image S3Object="{Bucket=rekognitionprojectpatvin80,Name=Shakespeare.png}"
+
+# AWS CLI Commands
+
+aws rekognition detect-labels --image S3Object="{Bucket=rekognitionprojectpatvin80,Name=Shakespeare.png}"
+aws rekognition detect-text --image S3Object="{Bucket=rekognitionprojectpatvin80,Name=Shakespeare.png}"
+aws rekognition recognize-celebrities --image S3Object="{Bucket=rekognitionprojectpatvin80,Name=Shakespeare.png}"

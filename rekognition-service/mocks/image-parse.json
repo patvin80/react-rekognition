@@ -1,0 +1,8 @@
+{
+    "body":"https://us-east-1.tchyn.io/snopes-production/uploads/2015/10/trumppeople.jpg",
+    "requestContext": {
+      "identity": {
+        "cognitoIdentityId": "USER-SUB-1234"
+      }
+    }
+  }
