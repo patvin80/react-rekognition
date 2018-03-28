@@ -1,7 +1,7 @@
 # AWS Rekognition - AWS Meetup Lightning Talk
 Hello and Welcome to this repository that exposes capabilities of AWS Rekognition to parse and identify celebrities from images and validates the quote. 
 
-1. About Me - Vinit Patankar
+1. About Me - [ Vinit Patankar ](https://www.linkedin.com/in/pvinit)
 2. Thank you Sponsors - 
 3. AWS Rekognition Service Overview
     1. AWS Rekognition Service [1]
