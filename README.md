@@ -10,7 +10,10 @@ Hello and Welcome to this repository that exposes capabilities of AWS Rekognitio
     3. Pricing [4]
 4. Idea Phase
     1. *AWS CLI [5]
+        1. aws rekognition detect-labels --image S3Object="{Bucket=rekognitionprojectpatvin80,Name=Shakespeare.png}"
+        2. aws rekognition detect-text --image S3Object="{Bucket=rekognitionprojectpatvin80,Name=Shakespeare.png}"
     2. recognize-celebrities [6]
+        1. aws rekognition recognize-celebrities --image S3Object="{Bucket=rekognitionprojectpatvin80,Name=Shakespeare.png}"
     3. Last Week Tonight Site [Definitely Real Quotes](ww.definitelyrealquotes.com)[7]
 5. Solution Development
     1. React [8]  
