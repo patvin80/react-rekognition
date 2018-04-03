@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import AWS from 'aws-sdk';
 import axios from 'axios';
-AWS.config.update({region: 'us-east-1', credentials: {"accessKeyId": "AKIAJVZOF26IUECSZU7Q", "secretAccessKey": "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"}});
+AWS.config.update({region: 'us-east-1', credentials: {"accessKeyId": "XXXXXX", "secretAccessKey": "XXXXXX"}});
 
 class Search extends Component {
 
